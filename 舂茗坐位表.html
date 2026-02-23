@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查詢座位</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input {
+            padding: 12px;
+            width: 80%;
+            font-size: 18px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>查詢你的座位</h1>
+    <input type="text" id="nameInput" placeholder="請輸入你的姓名">
+    <button onclick="findSeat()">查詢</button>
+    <div id="result"></div>
+
+    <script>
+        // 座位数据
+        const seatData = [
+            { name: "劉國華", seat: 1, table: 1 },
+            { name: "唐月琴", seat: 2, table: 1 },
+            { name: "梁敏儀", seat: 3, table: 1 },
+            { name: "謝麗群", seat: 4, table: 1 },
+            { name: "周健", seat: 5, table: 1 },
+            { name: "陳志仁", seat: 6, table: 1 },
+            { name: "羅麗晶", seat: 7, table: 1 },
+            { name: "李潤群", seat: 8, table: 1 },
+            { name: "胡永成", seat: 9, table: 1 },
+            { name: "盧文法", seat: 10, table: 1 },
+            { name: "黎玉蓮", seat: 11, table: 1 },
+            { name: "盧文柏", seat: 12, table: 1 },
+            { name: "林玉香", seat: 13, table: 2 },
+            { name: "高裕宣", seat: 14, table: 2 },
+            { name: "李鉅深", seat: 15, table: 2 },
+            { name: "侯惠芳", seat: 16, table: 2 },
+            { name: "朱德明", seat: 17, table: 2 },
+            { name: "范素賢", seat: 18, table: 2 },
+            { name: "張翠英", seat: 19, table: 2 },
+            { name: "梁文惠", seat: 20, table: 2 },
+            { name: "張惠蘭", seat: 21, table: 2 },
+            { name: "梁翠冰", seat: 22, table: 2 },
+            { name: "梁振英", seat: 23, table: 2 },
+            { name: "李加超", seat: 24, table: 2 }
+        ];
+
+        function findSeat() {
+            const name = document.getElementById("nameInput").value.trim();
+            const resultDiv = document.getElementById("result");
+            const person = seatData.find(p => p.name === name);
+
+            if (person) {
+                resultDiv.innerHTML = `✅ 你在第 ${person.table} 席，座位號是 ${person.seat} 號。`;
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = "❌ 未找到你的名字，請重新輸入。";
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
+
