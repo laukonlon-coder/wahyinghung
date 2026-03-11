@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查詢座位
-    </title>
+    <title>宏武丙午年春茗 - 查詢座位</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +12,11 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'KaiTi', 'SimSun', 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #FFCC00; /* 喜庆金色背景 */
+            color: #B22222;            /* 暗红色文字 */
+            background-repeat: no-repeat;
+            background-size: cover;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,7 +25,7 @@
         }
 
         .container {
-            background: red;
+            background: white; /* 修复红色背景问题 */
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 50px 40px;
@@ -44,7 +46,7 @@
         }
 
         h1 {
-            color: #333;
+            color: #B22222; /* 暗红色标题 */
             font-size: 32px;
             margin-bottom: 10px;
             text-align: center;
@@ -53,7 +55,7 @@
 
         .subtitle {
             text-align: center;
-            color: #999;
+            color: #8B4513;
             font-size: 14px;
             margin-bottom: 30px;
         }
@@ -76,8 +78,8 @@
 
         input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            border-color: #B22222;
+            box-shadow: 0 0 0 4px rgba(178, 34, 34, 0.1);
         }
 
         input::placeholder {
@@ -88,18 +90,18 @@
             padding: 16px 24px;
             font-size: 16px;
             font-weight: 600;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #B22222; /* 暗红色按钮 */
             color: white;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(178, 34, 34, 0.4);
         }
 
         button:active {
@@ -130,9 +132,9 @@
         }
 
         .result-success {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            border: 2px solid #4caf50;
+            background-color: #f8f5e6; /* 浅金色成功背景 */
+            color: #B22222;
+            border: 2px solid #B22222;
         }
 
         .result-error {
@@ -185,7 +187,7 @@
 </head>
 <body>
     <div class="container">
-    <h1>宏武太極學會 丙午年春茗</h1>
+        <h1>宏武太極學會 丙午年春茗</h1>
         <h1>🎫 查詢座位</h1>
         <div class="subtitle">輸入您的姓名查詢座位資訊</div>
         
@@ -203,117 +205,132 @@
     </div>
 
     <script>
-        // 座位数据
+        // 修复：修正table属性值的字符串格式
         const seatData = [
-            { name: "梁紫玲", seat: 1, table: 1聞鷄起舞 },
-            { name: "馬錦明", seat: 2, table: 1聞鷄起舞 },
-            { name: "梁囯明", seat: 3, table: 1聞鷄起舞 },
-            { name: "林绮華", seat: 4, table: 1聞鷄起舞 },
-            { name: "羅國蕃", seat: 5, table: 1聞鷄起舞 },
-            { name: "郭慧貞", seat: 6, table: 1聞鷄起舞 },
-            { name: "馬靜雯", seat: 7, table: 1聞鷄起舞 },
-            { name: "胡草玉", seat: 8, table: 1 聞鷄起舞},
-            { name: "郭百根", seat: 9, table: 1 聞鷄起舞},
-            { name: "鄒金佑", seat: 10, table: 1 聞鷄起舞},
-            { name: "張惠蘭", seat: 11, table: 1 聞鷄起舞},
-            { name: "羅彩蘭", seat: 12, table: 1 聞鷄起舞},
-            { name: "呂重嫻", seat: 1, table: 2旭日东升 },
-            { name: "顏艷霞", seat: 2, table: 2 旭日东升},
-            { name: "麥煥娥", seat: 3, table: 2旭日东升 },
-            { name: "余衍武", seat: 4, table: 2 旭日东升},
-            { name: "李潔雲", seat: 5, table: 2 旭日东升},
-            { name: "楊寶珍", seat: 6, table: 2旭日东升 },
-            { name: "羅玉琼", seat: 7, table: 2旭日东升 },
-            { name: "魏梅花", seat: 8, table: 2 旭日东升},
-            { name: "梁國昌", seat: 9, table: 2旭日东升 },
-            { name: "招翠萍", seat: 10, table: 2 旭日东升},
-            { name: "冼麗華", seat: 11, table: 2 旭日东升},
-            { name: "何海新", seat: 12 , table: 2 旭日东升},
-{ name: "黑志宏", seat: 1, table: 3金雞報曉 },
-            { name: "李成敏", seat: 2, table: 3 金雞報曉 },
-            { name: "黑韵潔", seat: 3, table: 3 金雞報曉},
-            { name: "陳敏強", seat: 4, table: 3 金雞報曉},
-            { name: "吳少珍", seat: 5, table: 3 金雞報曉},
-            { name: "李國洪", seat: 6, table: 3金雞報曉},
-            { name: "蔡芝華", seat: 7, table: 3 金雞報曉},
-            { name: "蔡芝薇", seat: 8, table: 3 金雞報曉},
-            { name: "陳東華", seat: 9, table: 3 金雞報曉},
-            { name: "唐月琴", seat: 10, table: 3 金雞報曉},
-            { name: "曾煒兆", seat: 11, table: 3 金雞報曉},
-            { name: "蘇少英", seat: 12, table: 3 金雞報曉},
-            { name: "劉國華", seat: 1, table: 5蛟龍翻浪},
-            { name: "陳麗平", seat: 2, table: 5蛟龍翻浪},
-            { name: "馬瑞文", seat: 3, table: 5蛟龍翻浪 },
-            { name: "陳國華", seat: 4, table: 5蛟龍翻浪},
-            { name: "秦月雲", seat: 5, table: 5蛟龍翻浪},
-            { name: "鄧頌明", seat: 6, table: 5 蛟龍翻浪},
-            { name: "廖桂芬", seat: 7, table: 5蛟龍翻浪 },
-            { name: "關永生", seat: 8, table: 5蛟龍翻浪},
-            { name: "譚泰光", seat: 9, table: 5 蛟龍翻浪},
-            { name: "李嬋玲", seat: 10, table: 5蛟龍翻浪},
-            { name: "呂禮全", seat: 11, table: 5蛟龍翻浪},
-            { name: "李炳光", seat: 12 , table: 5蛟龍翻浪},
-{ name: "何國傑", seat: 1, table: 6大鵬展翅 },
-            { name: "曾健文", seat: 2, table: 6大鵬展翅 },
-            { name: "伍仲安", seat: 3, table: 6大鵬展翅 },
-            { name: "鍾佩儀", seat: 4, table: 6大鵬展翅 },
-            { name: "曾慕淩", seat: 5, table: 6大鵬展翅 },
-            { name: "譚秀瓊", seat: 6, table: 6大鵬展翅 },
-            { name: "李依華", seat: 7, table: 6大鵬展翅 },
-            { name: "劉民威", seat: 8, table: 6大鵬展翅},
-            { name: "陳偉平", seat: 9, table: 6大鵬展翅},
-            { name: "鍾楚如", seat: 10, table: 6大鵬展翅},
-            { name: "陳莃嵐", seat: 11, table: 6大鵬展翅},
-            { name: "周淑儀", seat: 12, table: 6大鵬展翅},
-            { name: "譚綺雲", seat: 1, table: 8流星趕月 },
-            { name: "陳燕鈴", seat: 2, table: 8流星趕月 },
-            { name: "林玉娣", seat: 3, table:  8流星趕月},
-            { name: "黃剛明", seat: 4, table: 8流星趕月},
-            { name: "吳靜華", seat: 5, table: 8流星趕月 },
-            { name: "傅美玲", seat: 6, table: 8流星趕月 },
-            { name: "梁文慧", seat: 7, table: 8流星趕月 },
-            { name: "邱景鴻", seat: 8, table: 8流星趕月},
-            { name: "梁淑卿", seat: 9, table: 8流星趕月 },
-            { name: "李美珍", seat: 10, table: 8流星趕月},
-            { name: "彭婉明", seat: 11, table: 8流星趕月},
-            { name: "英麗連", seat: 12 , table: 8流星趕月},
-{ name: "霍少瓊", seat: 1, table: 9犀牛望月 },
-            { name: "林瓊", seat: 2, table: 9犀牛望月},
-            { name: "洪曉燕", seat: 3, table: 9犀牛望月 },
-            { name: "劉懋妍", seat: 4, table: 9犀牛望月 },
-            { name: "黃少泉", seat: 5, table: 9犀牛望月 },
-            { name: "李蕙愛", seat: 6, table: 9犀牛望月 },
-            { name: "陳瑞珍", seat: 7, table: 9犀牛望月 },
-            { name: "林慧如", seat: 8, table: 9犀牛望月},
-            { name: "倪樺", seat: 9, table: 9犀牛望月},
-            { name: "紀見安", seat: 10, table: 9犀牛望月 },
-            { name: "徐月明", seat: 11, table: 9犀牛望月},
-            { name: "黃少貞", seat: 12, table: 9犀牛望月},
-            { name: "梁麗萍", seat: 1, table: 10自猿獻果 },
-            { name: "張小珠", seat: 2, table: 10自猿獻果},
-            { name: "何婉宜", seat: 3, table: 10自猿獻果 },
-            { name: "曾德貞", seat: 4, table: 10自猿獻果},
-            { name: "張麗雲", seat: 5, table: 10自猿獻果},
-            { name: "姚品端", seat: 6, table: 10自猿獻果 },
-            { name: "龐麗芬", seat: 7, table: 10自猿獻果 },
-            { name: "梁卓娟", seat: 8, table: 10自猿獻果},
-            { name: "胡志潔", seat: 9, table: 10自猿獻果},
-            { name: "楊錦卿", seat: 10, table: 10自猿獻果 },
-            { name: "梁潔媚", seat: 11, table: 10自猿獻果},
-            { name: "梁淑芬", seat: 12 , table: 10自猿獻果},
-
+            { name: "梁紫玲", seat: 1, table: "1 聞鷄起舞" },
+            { name: "馬錦明", seat: 2, table: "1 聞鷄起舞" },
+            { name: "梁囯明", seat: 3, table: "1 聞鷄起舞" },
+            { name: "林绮華", seat: 4, table: "1 聞鷄起舞" },
+            { name: "羅國蕃", seat: 5, table: "1 聞鷄起舞" },
+            { name: "郭慧貞", seat: 6, table: "1 聞鷄起舞" },
+            { name: "馬靜雯", seat: 7, table: "1 聞鷄起舞" },
+            { name: "胡草玉", seat: 8, table: "1 聞鷄起舞" },
+            { name: "郭百根", seat: 9, table: "1 聞鷄起舞" },
+            { name: "鄒金佑", seat: 10, table: "1 聞鷄起舞" },
+            { name: "張惠蘭", seat: 11, table: "1 聞鷄起舞" },
+            { name: "羅彩蘭", seat: 12, table: "1 聞鷄起舞" },
+            { name: "呂重嫻", seat: 1, table: "2 旭日东升" },
+            { name: "顏艷霞", seat: 2, table: "2 旭日东升" },
+            { name: "麥煥娥", seat: 3, table: "2 旭日东升" },
+            { name: "余衍武", seat: 4, table: "2 旭日东升" },
+            { name: "李潔雲", seat: 5, table: "2 旭日东升" },
+            { name: "楊寶珍", seat: 6, table: "2 旭日东升" },
+            { name: "羅玉琼", seat: 7, table: "2 旭日东升" },
+            { name: "魏梅花", seat: 8, table: "2 旭日东升" },
+            { name: "梁國昌", seat: 9, table: "2 旭日东升" },
+            { name: "招翠萍", seat: 10, table: "2 旭日东升" },
+            { name: "冼麗華", seat: 11, table: "2 旭日东升" },
+            { name: "何海新", seat: 12, table: "2 旭日东升" },
+            { name: "黑志宏", seat: 1, table: "3 金雞報曉" },
+            { name: "李成敏", seat: 2, table: "3 金雞報曉" },
+            { name: "黑韵潔", seat: 3, table: "3 金雞報曉" },
+            { name: "陳敏強", seat: 4, table: "3 金雞報曉" },
+            { name: "吳少珍", seat: 5, table: "3 金雞報曉" },
+            { name: "李國洪", seat: 6, table: "3 金雞報曉" },
+            { name: "蔡芝華", seat: 7, table: "3 金雞報曉" },
+            { name: "蔡芝薇", seat: 8, table: "3 金雞報曉" },
+            { name: "陳東華", seat: 9, table: "3 金雞報曉" },
+            { name: "唐月琴", seat: 10, table: "3 金雞報曉" },
+            { name: "曾煒兆", seat: 11, table: "3 金雞報曉" },
+            { name: "蘇少英", seat: 12, table: "3 金雞報曉" },
+            { name: "劉國華", seat: 1, table: "5 蛟龍翻浪" },
+            { name: "陳麗平", seat: 2, table: "5 蛟龍翻浪" },
+            { name: "馬瑞文", seat: 3, table: "5 蛟龍翻浪" },
+            { name: "陳國華", seat: 4, table: "5 蛟龍翻浪" },
+            { name: "秦月雲", seat: 5, table: "5 蛟龍翻浪" },
+            { name: "鄧頌明", seat: 6, table: "5 蛟龍翻浪" },
+            { name: "廖桂芬", seat: 7, table: "5 蛟龍翻浪" },
+            { name: "關永生", seat: 8, table: "5 蛟龍翻浪" },
+            { name: "譚泰光", seat: 9, table: "5 蛟龍翻浪" },
+            { name: "李嬋玲", seat: 10, table: "5 蛟龍翻浪" },
+            { name: "呂禮全", seat: 11, table: "5 蛟龍翻浪" },
+            { name: "李炳光", seat: 12, table: "5 蛟龍翻浪" },
+            { name: "何國傑", seat: 1, table: "6 大鵬展翅" },
+            { name: "曾健文", seat: 2, table: "6 大鵬展翅" },
+            { name: "伍仲安", seat: 3, table: "6 大鵬展翅" },
+            { name: "鍾佩儀", seat: 4, table: "6 大鵬展翅" },
+            { name: "曾慕淩", seat: 5, table: "6 大鵬展翅" },
+            { name: "譚秀瓊", seat: 6, table: "6 大鵬展翅" },
+            { name: "李依華", seat: 7, table: "6 大鵬展翅" },
+            { name: "劉民威", seat: 8, table: "6 大鵬展翅" },
+            { name: "陳偉平", seat: 9, table: "6 大鵬展翅" },
+            { name: "鍾楚如", seat: 10, table: "6 大鵬展翅" },
+            { name: "陳莃嵐", seat: 11, table: "6 大鵬展翅" },
+            { name: "周淑儀", seat: 12, table: "6 大鵬展翅" },
+            { name: "譚綺雲", seat: 1, table: "8 流星趕月" },
+            { name: "陳燕鈴", seat: 2, table: "8 流星趕月" },
+            { name: "林玉娣", seat: 3, table: "8 流星趕月" },
+            { name: "黃剛明", seat: 4, table: "8 流星趕月" },
+            { name: "吳靜華", seat: 5, table: "8 流星趕月" },
+            { name: "傅美玲", seat: 6, table: "8 流星趕月" },
+            { name: "梁文慧", seat: 7, table: "8 流星趕月" },
+            { name: "邱景鴻", seat: 8, table: "8 流星趕月" },
+            { name: "梁淑卿", seat: 9, table: "8 流星趕月" },
+            { name: "李美珍", seat: 10, table: "8 流星趕月" },
+            { name: "彭婉明", seat: 11, table: "8 流星趕月" },
+            { name: "英麗連", seat: 12, table: "8 流星趕月" },
+            { name: "霍少瓊", seat: 1, table: "9 犀牛望月" },
+            { name: "林瓊", seat: 2, table: "9 犀牛望月" },
+            { name: "洪曉燕", seat: 3, table: "9 犀牛望月" },
+            { name: "劉懋妍", seat: 4, table: "9 犀牛望月" },
+            { name: "黃少泉", seat: 5, table: "9 犀牛望月" },
+            { name: "李蕙愛", seat: 6, table: "9 犀牛望月" },
+            { name: "陳瑞珍", seat: 7, table: "9 犀牛望月" },
+            { name: "林慧如", seat: 8, table: "9 犀牛望月" },
+            { name: "倪樺", seat: 9, table: "9 犀牛望月" },
+            { name: "紀見安", seat: 10, table: "9 犀牛望月" },
+            { name: "徐月明", seat: 11, table: "9 犀牛望月" },
+            { name: "黃少貞", seat: 12, table: "9 犀牛望月" },
+            { name: "梁麗萍", seat: 1, table: "10 自猿獻果" },
+            { name: "張小珠", seat: 2, table: "10 自猿獻果" },
+            { name: "何婉宜", seat: 3, table: "10 自猿獻果" },
+            { name: "曾德貞", seat: 4, table: "10 自猿獻果" },
+            { name: "張麗雲", seat: 5, table: "10 自猿獻果" },
+            { name: "姚品端", seat: 6, table: "10 自猿獻果" },
+            { name: "龐麗芬", seat: 7, table: "10 自猿獻果" },
+            { name: "梁卓娟", seat: 8, table: "10 自猿獻果" },
+            { name: "胡志潔", seat: 9, table: "10 自猿獻果" },
+            { name: "楊錦卿", seat: 10, table: "10 自猿獻果" },
+            { name: "梁潔媚", seat: 11, table: "10 自猿獻果" },
+            { name: "梁淑芬", seat: 12, table: "10 自猿獻果" }
         ];
 
         function findSeat() {
+            // 修复：增加容错性，去除首尾空格
             const name = document.getElementById("nameInput").value.trim();
             const resultDiv = document.getElementById("result");
+            
+            // 修复：使用严格匹配，同时处理空输入
+            if (!name) {
+                resultDiv.innerHTML = `
+                    <div class="result-content">
+                        <span class="emoji">⚠️</span>
+                        <span>請輸入姓名後查詢</span>
+                    </div>
+                `;
+                resultDiv.classList.remove("result-success", "hidden");
+                resultDiv.classList.add("result-error");
+                return;
+            }
+
+            // 查找匹配的记录
             const person = seatData.find(p => p.name === name);
 
             if (person) {
                 resultDiv.innerHTML = `
                     <div class="result-content">
                         <span class="emoji">✅</span>
-                        <span class="seat-info">第 ${person.table} 席，座位號 ${person.seat} 號</span>
+                        <span class="seat-info">${person.name} 您好！<br>您的座位是：${person.table}，座位號 ${person.seat} 號</span>
                     </div>
                 `;
                 resultDiv.classList.remove("result-error");
@@ -322,7 +339,7 @@
                 resultDiv.innerHTML = `
                     <div class="result-content">
                         <span class="emoji">❌</span>
-                        <span>未找到您的名字，請重新輸入</span>
+                        <span>未找到「${name}」的座位信息，請檢查姓名是否正確</span>
                     </div>
                 `;
                 resultDiv.classList.remove("result-success");
@@ -344,18 +361,4 @@
         });
     </script>
 </body>
-</html>
- <title>宏武丙午年春茗</title>
-    <style>
-        body {
-            background-color: #FFCC00; /* Festive gold color */
-            color: #B22222;      /* Dark red for text */
-            font-family: 'KaiTi', 'SimSun', 'Microsoft YaHei', Arial, sans-serif;
-            background-image: url('path-to-festive-background-image'); /* Add a background image */
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding: 20px;
-        }
-    </style>
-</head>
 </html>
